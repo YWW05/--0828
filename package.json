@@ -1,0 +1,15 @@
+{
+  "name": "music-td-visualizer",
+  "version": "1.0.0",
+  "description": "Web 音频分析并通过 WebSocket 发送到 TouchDesigner 的示例",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "start:port": "node server.js 9980"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
+
+

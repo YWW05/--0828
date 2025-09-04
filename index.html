@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>音乐可视化 · TouchDesigner 控制</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>音乐可视化 · TouchDesigner</h1>
+  </header>
+
+  <main class="app-main">
+    <section class="panel">
+      <h2>1) 上传与播放</h2>
+      <div class="row">
+        <input id="fileInput" type="file" accept="audio/*">
+        <button id="playBtn" disabled>播放</button>
+        <button id="pauseBtn" disabled>暂停</button>
+        <button id="stopBtn" disabled>停止</button>
+      </div>
+      <audio id="audioEl" controls class="audio-el"></audio>
+    </section>
+
+    <section class="panel">
+      <h2>2) 分析与可视化</h2>
+      <div class="row">
+        <label>FFT Size
+          <select id="fftSize">
+            <option value="512">512</option>
+            <option value="1024" selected>1024</option>
+            <option value="2048">2048</option>
+            <option value="4096">4096</option>
+          </select>
+        </label>
+        <label>平滑 (0-1)
+          <input id="smoothing" type="number" min="0" max="1" step="0.05" value="0.8">
+        </label>
+        <label>下采样谱点数
+          <input id="bins" type="number" min="16" max="256" step="1" value="64">
+        </label>
+        <label>发送帧率 (fps)
+          <input id="sendFps" type="number" min="5" max="120" step="1" value="30">
+        </label>
+        <button id="testToneBtn" type="button">开启测试音</button>
+        <button id="sendTestBtn" type="button">发送测试帧</button>
+      </div>
+      <canvas id="viz" width="960" height="240"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>3) 连接 TouchDesigner</h2>
+      <div class="row">
+        <label>WebSocket 地址
+          <input id="wsUrl" type="text" value="ws://127.0.0.1:9980" size="28">
+        </label>
+        <button id="connectBtn">连接</button>
+        <button id="disconnectBtn" disabled>断开</button>
+        <span id="connStatus" class="status status-disconnected">未连接</span>
+      </div>
+      <div class="hint">建议在 TouchDesigner 使用 WebSocket Server DAT 监听上述端口。</div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>本页面仅用于本地演示，音频分析通过 Web Audio API，数据通过 WebSocket 发送。</small>
+  </footer>
+
+  <script src="app.js"></script>
+  </body>
+  </html>
+
+
